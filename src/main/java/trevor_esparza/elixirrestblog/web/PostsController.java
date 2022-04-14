@@ -21,6 +21,32 @@ public class PostsController {
         return posts;
     }
 
+    @GetMapping("{blogPostId}")
+    public Post getbyId(@PathVariable Long blogPostId){
+        return new Post(blogPostId, "new post from getbyID", "blah blah blah blah blah");
+    }
+
+
+    @PostMapping
+    private void createPost(@RequestBody Post newPost){
+        System.out.println("New Post from POstman" + newPost);
+    }
+
+
+    @PutMapping("{blogPostId}")
+    private void updatePost(@PathVariable Long blogPostId, @RequestBody Post updatedPost){
+        System.out.println("Blog post " + blogPostId + " has been updated with " + updatedPost);
+    }
+
+    @DeleteMapping("{blogPostId}")
+    private void deletePost (@PathVariable Long blogPostId){
+        System.out.println("delete method reached" + blogPostId);
+    }
+
+
+
+
+
 
 
 
