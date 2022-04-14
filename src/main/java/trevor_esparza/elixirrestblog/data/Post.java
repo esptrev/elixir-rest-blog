@@ -1,7 +1,7 @@
 package trevor_esparza.elixirrestblog.data;
 
 import lombok.*;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Getter
 @Setter
 @NoArgsConstructor
@@ -10,7 +10,7 @@ import lombok.*;
 
 public class Post {
 
-    private Long id;
+    private long id;
     private String title;
     private String content;
 
