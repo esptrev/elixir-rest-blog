@@ -13,7 +13,7 @@ public class PostsController {
     @GetMapping
     public List<Post> getAll(){
         List<Post> posts = new ArrayList<>();
-        System.out.println(posts);
+
         posts.add(new Post(1L, "blogone", "woohoo"));
         posts.add(new Post(2L, "blogtwo", "woohoowoohoo"));
         posts.add(new Post(3L, "blogthree", "woohoowoohoowoohoo"));
