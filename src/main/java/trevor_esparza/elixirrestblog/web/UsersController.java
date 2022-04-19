@@ -4,6 +4,8 @@ package trevor_esparza.elixirrestblog.web;
 import org.springframework.web.bind.annotation.*;
 import trevor_esparza.elixirrestblog.data.User;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +60,11 @@ public class UsersController {
     @ResponseBody
     public User getByEmail(@RequestParam String email) {
         return new User(10L, "JimmyJohns", email, "asdfddddddddd", null, null);
+    }
+
+    @PutMapping("/api/users/{id}/updatePassword")
+    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword){
+        System.out.println("The old password " + oldPassword + " for user " + id + " has been changed to " + newPassword);
     }
 
 

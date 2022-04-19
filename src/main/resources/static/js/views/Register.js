@@ -1,5 +1,7 @@
 import CreateView from "../createView.js"
+
 const USER_URI = "http://localhost:8080/api/users"
+
 export default function Register(props) {
     return `
     <!DOCTYPE html>
@@ -25,8 +27,8 @@ export default function Register(props) {
 `;
 }
 
-export function RegisterEvent(){
-    $("#register-btn").click(function(){
+export function RegisterEvent() {
+    $("#register-btn").click(function () {
 ///creates new user object from input fields on register form
         let newUser = {
             username: $("#username").val(),
