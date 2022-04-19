@@ -62,9 +62,11 @@ public class UsersController {
         return new User(10L, "JimmyJohns", email, "asdfddddddddd", null, null);
     }
 
-    @PutMapping("/api/users/{id}/updatePassword")
-    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword){
-        System.out.println("The old password " + oldPassword + " for user " + id + " has been changed to " + newPassword);
+    @PutMapping("{id}/updatePassword")
+    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword,
+                                @Valid @Size(min = 3) @RequestParam String newPassword){
+        System.out.println("The old password " + oldPassword + " for user " + id +
+                " has been changed to " + newPassword);
     }
 
 

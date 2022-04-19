@@ -4,6 +4,7 @@ const USER_URI = "http://localhost:8080/api/users"
 
 
 export default function Profile(props) {
+    console.log(props);
     return `
     <!DOCTYPE html>
         <html>
@@ -13,11 +14,11 @@ export default function Profile(props) {
             </head>
             <body>
                 <h1>User Profile</h1>
-                <div id = "user-id-container">This will be user.id</div>
+                <div id = "user-id-container" value="${props.users.id}">This will be user.id</div>
                 <form id="profile-info">
                     
                     <label for="username">Username</label>
-                    <input id="username" name="username" type="text"/>
+                    <input id="username" name="username" value= "${props.users.username} type="text"/>
                     <label for="email">Email</label>
                     <input id="email" name="email" type="email">
                     <label for="current password"> Current Password</label>
@@ -36,23 +37,16 @@ export default function Profile(props) {
 
 export function ProfileEvent() {
     $("#update-profile-btn").click(function () {
-        const id = $('#user-id-container').val();
-/// will update userID, password or email
-        let updatedProfile = {
-            username: $("#username").val(),
-            email: $("#email").val(),
-            password: $("#confirm-password").val()
-        }
 
-        console.log(updatedProfile);
+        const id = 1;
+        const newPassword = $("#confirm-password").val()
+
 ///makes post request
         let request = {
             method: "PUT",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(updatedProfile)
         }
 ///sends to backend
-        fetch(`${USER_URI}/${id}`, request)
+        fetch(`${USER_URI}/${id}/updatePassword?newPassword=${newPassword}`, request)
             .then(response => {
                 console.log(response.status);
                 CreateView("/api/users/{id}/updatePassword");
