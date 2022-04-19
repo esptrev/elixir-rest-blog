@@ -10,7 +10,7 @@ public class ViewController {
 
 
 
-    @RequestMapping(value = {"/", "/about", "/posts", "/login", "/home"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/about", "/posts", "/login", "/home", "/register"}, method = RequestMethod.GET)
     public String showView(){
         return "forward:/index.html";
     }

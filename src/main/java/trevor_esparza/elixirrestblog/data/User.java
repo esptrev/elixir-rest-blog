@@ -1,9 +1,8 @@
 package trevor_esparza.elixirrestblog.data;
 
 import lombok.*;
-import java.util.Date;
 
-
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,23 +11,15 @@ import java.util.Date;
 @ToString
 public class User {
 
-    Long id;
-    String username;
-    String email;
-    String password;
-    Date createdAt;
-    Role role;
 
     public enum Role{USER, ADMIN}
 
-
-
-
-
-
-
-
-
+    private Long id;
+    private String username;
+    private String email;
+    private String password;
+    private LocalDate createdAt;
+    private Role role;
 
 
 
