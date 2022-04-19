@@ -13,6 +13,7 @@ public class Post {
     private long id;
     private String title;
     private String content;
+    private User author;
 
     ////With Lombok we no longer need to generate setters/getters/constructors
 
