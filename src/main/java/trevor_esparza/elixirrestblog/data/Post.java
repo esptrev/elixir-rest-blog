@@ -2,53 +2,29 @@ package trevor_esparza.elixirrestblog.data;
 
 import lombok.*;
 
+import javax.persistence.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-
+@Entity
+@Table(name = "blog_posts")
 public class Post {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String content;
-    private User author;
-
-    ////With Lombok we no longer need to generate setters/getters/constructors
-
-//    public Post() {
-//    }
-//
-//    public Post(Long id, String title, String content) {
-//        this.id = id;
-//        this.title = title;
-//        this.content = content;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public String getTitle() {
-//        return title;
-//    }
-//
-//    public void setTitle(String title) {
-//        this.title = title;
-//    }
-//
-//    public String getContent() {
-//        return content;
-//    }
-//
-//    public void setContent(String content) {
-//        this.content = content;
-//    }
+//    private User author;
 
 
+    public Post(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }///END OF CLASS
