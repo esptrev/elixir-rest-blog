@@ -4,6 +4,7 @@ package trevor_esparza.elixirrestblog.web;
 import org.springframework.web.bind.annotation.*;
 import trevor_esparza.elixirrestblog.data.Post;
 import trevor_esparza.elixirrestblog.data.PostRepository;
+import trevor_esparza.elixirrestblog.data.UserRepository;
 
 import java.util.*;
 
@@ -11,10 +12,12 @@ import java.util.*;
 @RequestMapping(value = "/api/posts", headers="Accept=application/json")
 public class PostsController {
 
-    private PostRepository postRespository;
+    private final PostRepository postRespository;
+    private final UserRepository userRepository;
 
-    public PostsController(PostRepository postRespository) {
+    public PostsController(PostRepository postRespository, UserRepository userRepository) {
         this.postRespository = postRespository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping

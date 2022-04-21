@@ -13,7 +13,7 @@ import java.util.*;
 @RestController
 @RequestMapping(value = "/api/users", headers = "Accept=application/json")
 public class UsersController {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UsersController(UserRepository userRepository) {
         this.userRepository = userRepository;
