@@ -34,6 +34,7 @@ public class PostsController {
     @PostMapping
     private void createPost(@RequestBody Post newPost){
         Post postToAdd = new Post(newPost.getTitle(), newPost.getContent());
+        postToAdd.setAuthor(userRepository.getById(2L));
         postRespository.save(postToAdd);
         System.out.println("New Post from POstman,createPost function reached" + newPost);
     }

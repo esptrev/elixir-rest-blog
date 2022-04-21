@@ -12,7 +12,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "blog_posts")
+@Table(name = "blog_categories")
 public class Category {
 
     @Id

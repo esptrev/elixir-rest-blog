@@ -4,7 +4,6 @@ package trevor_esparza.elixirrestblog.web;
 import org.springframework.web.bind.annotation.*;
 import trevor_esparza.elixirrestblog.data.User;
 import trevor_esparza.elixirrestblog.data.UserRepository;
-import trevor_esparza.elixirrestblog.data.Post;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
@@ -25,9 +24,8 @@ public class UsersController {
     }
 
     @GetMapping("{userId}")
-    public User getbyId(@PathVariable Long userId) {
-        User queriedUser = userRepository.getById(userId);
-        return queriedUser;
+    public Optional<User> getbyId(@PathVariable Long userId) {
+        return userRepository.findById(userId);
     }
 
 

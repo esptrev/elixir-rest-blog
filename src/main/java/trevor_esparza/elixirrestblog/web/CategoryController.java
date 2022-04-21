@@ -2,12 +2,12 @@ package trevor_esparza.elixirrestblog.web;
 
 
 import org.springframework.web.bind.annotation.*;
-import trevor_esparza.elixirrestblog.data.CategoryRepository;
-import trevor_esparza.elixirrestblog.data.PostRepository;
-import trevor_esparza.elixirrestblog.data.UserRepository;
+import trevor_esparza.elixirrestblog.data.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/categories", headers="Accept=application/json")
+@RequestMapping(value = "/api/categories", headers = "Accept=application/json")
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
@@ -20,13 +20,16 @@ public class CategoryController {
         this.userRepository = userRepository;
     }
 
-    //    @GetMapping("/categoryName")
-//    public List<Category> getPostsByCategory(@RequestParam String categoryName){
-//      Category cat =  categoryRepository.
-//        return cat.getPost();
-//
-//    }
+    @GetMapping("/categoryName")
+    public List<Post> getPostsByCategory(@RequestParam String categoryName) {
+        return postRepository.findAllByCategories(categoryRepository.findCategoryByName(categoryName));
 
+    }
+
+    @GetMapping("/titleKeyword")
+    private List<Post> searchPostsByTitleKeyword(@RequestParam String keyword){
+        return postRepository.searchByTitleLike(keyword);
+    }
 
 
 }

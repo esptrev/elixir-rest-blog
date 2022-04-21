@@ -1,5 +1,7 @@
 package trevor_esparza.elixirrestblog.data;
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
