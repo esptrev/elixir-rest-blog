@@ -30,8 +30,7 @@ public class PostsController {
 
     @GetMapping("{blogPostId}")
     public Post getbyId(@PathVariable Long blogPostId){
-        Post  queriedPost = postRepository.getById(blogPostId);
-        return queriedPost;
+        return postRepository.getById(blogPostId);
     }
 
     @PostMapping
@@ -48,6 +47,7 @@ public class PostsController {
         Post postToUpdate = postRepository.getById(blogPostId);
         postToUpdate.setContent(updatedPost.getContent());
         postToUpdate.setTitle(updatedPost.getTitle());
+        postRepository.save(postToUpdate);
         System.out.println("Blog post " + blogPostId + " has been updated with " + updatedPost);
     }
 

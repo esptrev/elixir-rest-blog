@@ -17,7 +17,7 @@ import java.util.Collection;
 @Setter
 @ToString
 @Entity
-@Table(name = "blog_Users")
+@Table(name = "users")
 public class User {
 
 
@@ -52,6 +52,7 @@ public class User {
     @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnoreProperties("author")
     @ToString.Exclude
+//    @Transient
     private Collection<Post> posts;
 
     public enum Role{USER, ADMIN}

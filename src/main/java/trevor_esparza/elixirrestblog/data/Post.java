@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "blog_posts")
+@Table(name = "posts")
 public class Post {
 
     @Id
@@ -28,6 +28,7 @@ public class Post {
 
     @ManyToOne
     @JsonIgnoreProperties({"posts", "password"})
+//    @Transient
     private User author;
 
     @ManyToMany(
@@ -35,7 +36,7 @@ public class Post {
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},
             targetEntity = Category.class)
     @JoinTable(
-            name="post_category",
+            name="posts_categories",
             joinColumns = {@JoinColumn(name = "post_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name="category_id", nullable = false, updatable = false)},
             foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),

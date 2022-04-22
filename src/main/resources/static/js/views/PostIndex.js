@@ -12,7 +12,8 @@ export default function PostIndex(props) {
             <div id = "blogPostDiv">
                 ${props.posts.map(post => `<h3 id = "title-${post.id}">${post.title}</h3>
                  <p id = "content-${post.id}">${post.content}</p>
-                 <p id = "author-post">${post.author.username}</p>
+                 <p id = "author-post-${post.id}">${post.author.username}</p>
+                 <p id = "category-post-${post.id}">${post.categories.map(category => `<h4>${category.name}`)}</p>
                  <button type="button" class="edit-btn btn btn-success" data-id = "${post.id}">Edit</button>
                  <button type="button" class="delete-btn btn btn-danger" data-id = "${post.id}">Delete</button><br>
             </div>`
@@ -28,6 +29,7 @@ export default function PostIndex(props) {
                <div class="form-group">
                  <label for="newBlogEntryBodyArea">Content</label>
                  <textarea class="form-control" id="newBlogEntryBodyArea" rows="5" placeholder="Blog Content"></textarea>
+                 <p id = "newBlogEntryAuthor"></p>
                </div>
                <button id = "newBlogPostSubmit" type="button" class="btn btn-primary">Post</button>
                <button id = "editBlogPostButton" type="button" class="btn btn-success">Edit</button>
@@ -76,9 +78,13 @@ function grabBlogToEdit(){
         const id = $(this).data("id");
         const title = $("#title-" + id).text();
         const content = $("#content-" + id).text();
+        const author = $("#author-post-" + id).text();
+        const categories = $("#category-post-" + id).text();
+
         $('#blog-post-id').val(id);
         $('#newBlogEntryTitle').val(title);
         $('#newBlogEntryBodyArea').val(content);
+        $('#newBlogEntryAuthor').val(author);
 
         $('#editBlogPostButton').click(function (){
             editCurrentPost();
@@ -87,15 +93,17 @@ function grabBlogToEdit(){
 }
 
 function editCurrentPost(){
-   const id = $('#blog-post-id').val();
+   const idBlog = $('#blog-post-id').val();
 
     // const id = $(this).data("id");
-    console.log(id);
+    console.log(idBlog);
 
         const BLOG_INFO_TO_EDIT = {
             id: $('#blog-post-id').val(),
             title: $('#newBlogEntryTitle').val(),
-            content: $('#newBlogEntryBodyArea').val
+            content: $('#newBlogEntryBodyArea').val(),
+            author: $('#author-post').val(),
+            category: $('#category-post').val()
         }
 
         const OPTIONS = {
@@ -106,7 +114,7 @@ function editCurrentPost(){
             body: JSON.stringify(BLOG_INFO_TO_EDIT),
         };
 
-        fetch(`${BLOGS_URL}/${id}`,OPTIONS)
+        fetch(`${BLOGS_URL}/${BLOG_INFO_TO_EDIT.id}`,OPTIONS)
             .then(function (res){
                 console.log(res);
                  createView("{blogPostId}")
