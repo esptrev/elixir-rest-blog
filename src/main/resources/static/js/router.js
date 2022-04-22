@@ -19,7 +19,7 @@ import Profile from "./views/User.js";
  */
 export default function router(URI) {
     const routes = {
-        '/': {
+        '/home': {
             returnView: Home,
             state: {},
             uri: '/',

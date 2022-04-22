@@ -22,7 +22,7 @@ public class CategoryController {
 
     @GetMapping("/categoryName")
     public List<Post> getPostsByCategory(@RequestParam String categoryName) {
-        return postRepository.findAllByCategories(categoryRepository.findCategoryByName(categoryName));
+        return postRepository.findAllByCategoriesIn(categoryRepository.findCategoryByName(categoryName));
 
     }
 

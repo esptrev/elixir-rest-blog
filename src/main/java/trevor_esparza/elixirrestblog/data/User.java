@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -15,7 +17,7 @@ import java.util.Collection;
 @Setter
 @ToString
 @Entity
-@Table(name = "blogUsers")
+@Table(name = "blog_Users")
 public class User {
 
 
@@ -33,19 +35,23 @@ public class User {
     private String username;
 
     @Column(nullable = false,unique = true)
+    @Email
     private String email;
 
-    @Column(nullable = false)
+
+    @ToString.Exclude
     private String password;
 
     @Column
     private LocalDate createdAt;
 
-    @Column
+    @NotNull
+    @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnoreProperties("author")
+    @ToString.Exclude
     private Collection<Post> posts;
 
     public enum Role{USER, ADMIN}
