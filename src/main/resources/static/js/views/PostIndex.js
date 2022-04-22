@@ -47,8 +47,7 @@ export function PostsEvent(){
 function submitNewPost(){
 $('#newBlogPostSubmit').click(function(){
     const NEW_BLOG_INFO = {
-        // title: $('#newBlogEntryTitle').data("id"),
-        // content: $('#newBlogEntryBodyArea').data("id")
+
         title: $('#newBlogEntryTitle').val(),
         content: $('#newBlogEntryBodyArea').val()
     }
