@@ -1,6 +1,7 @@
 package trevor_esparza.elixirrestblog.web;
 
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import trevor_esparza.elixirrestblog.data.User;
 import trevor_esparza.elixirrestblog.data.UserRepository;
@@ -13,9 +14,11 @@ import java.util.*;
 @RequestMapping(value = "/api/users", headers = "Accept=application/json")
 public class UsersController {
     private final UserRepository userRepository;
+    private final PasswordEncoder pwhashmaker;
 
-    public UsersController(UserRepository userRepository) {
+    public UsersController(UserRepository userRepository, PasswordEncoder pwhashmaker) {
         this.userRepository = userRepository;
+        this.pwhashmaker = pwhashmaker;
     }
 
     @GetMapping
@@ -31,8 +34,13 @@ public class UsersController {
 
     @PostMapping
     private void createUser(@RequestBody User newUser) {
-        User userToAdd = new User(newUser.getUsername(), newUser.getEmail(), newUser.getPassword());
-        userRepository.save(userToAdd);
+        newUser.setRole(User.Role.USER);
+        newUser.setPassword(newUser.getPassword());
+        newUser.setUsername(newUser.getUsername());
+        String encryptedPW = newUser.getPassword();
+        encryptedPW = pwhashmaker.encode(encryptedPW);
+        newUser.setPassword(encryptedPW);
+        userRepository.save(newUser);
         System.out.println("Create User in UC reached");
     }
 
@@ -53,18 +61,16 @@ public class UsersController {
         System.out.println("deleteUser in UC reached");
     }
 
-//    @GetMapping("/username")
-//    @ResponseBody
-//    public User getByUsername(@RequestParam String userName) {
-//        return new User(10L, userName, "asdfasdfasdf", "asdfddddddddd", null, null,Arrays.asList(POST4,POST5));
-//    }
+    @GetMapping("userName")
+    public User getByUsername(@RequestParam String userName) {
+        return userRepository.findByUsername(userName);
+    }
 
 
-//    @GetMapping("/email")
-//    @ResponseBody
-//    public User getByEmail(@RequestParam String email) {
-//        return new User(10L, "JimmyJohns", email, "asdfddddddddd", null, null, Arrays.asList(POST6,POST7));
-//    }
+    @GetMapping("email")
+    User getByEmail(@RequestParam String email) {
+       return userRepository.findByEmail(email);
+    }
 
     @PutMapping("{id}/updatePassword")
     private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword,

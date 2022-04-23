@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 
 @Getter
 @Setter
@@ -28,7 +27,6 @@ public class Post {
 
     @ManyToOne
     @JsonIgnoreProperties({"posts", "password"})
-//    @Transient
     private User author;
 
     @ManyToMany(

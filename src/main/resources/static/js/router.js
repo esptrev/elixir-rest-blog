@@ -22,7 +22,7 @@ export default function router(URI) {
         '/home': {
             returnView: Home,
             state: {},
-            uri: '/',
+            uri: '/home',
             title: 'Home',
         },
         '/login': {
@@ -39,10 +39,10 @@ export default function router(URI) {
             title: 'Register',
             viewEvent: RegisterEvent
         },
-        '/user': {
+        '/users': {
             returnView: Profile,
             state: {
-                users: "/api/users/1"
+                users: "/api/users/"
                 ///the one will have to change to a path parameter for hook up to database
             },
             uri: '/users',

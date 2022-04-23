@@ -7,7 +7,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -34,8 +36,9 @@ public class User {
     @Column(nullable = false,unique = true)
     private String username;
 
-    @Column(nullable = false,unique = true)
+//    @Column(nullable = false,unique = true)
     @Email
+    @NotEmpty
     private String email;
 
 
@@ -43,16 +46,16 @@ public class User {
     private String password;
 
     @Column
+    @Null
     private LocalDate createdAt;
 
-    @NotNull
+//    @NotNull
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnoreProperties("author")
     @ToString.Exclude
-//    @Transient
     private Collection<Post> posts;
 
     public enum Role{USER, ADMIN}

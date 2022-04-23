@@ -31,7 +31,7 @@ export default function Profile(props) {
                     </form>               
                 </div>
                  <div id = "blogPostDiv">
-                ${props.users.posts.map(post => {
+                ${props.user.posts.map(post => {
                     return `<h3>${post.title}</h3>`
                 }
                 ).join('')}
