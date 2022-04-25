@@ -44,7 +44,7 @@ public class PostsController {
 //    }
 
     @PostMapping
-    private void create(@RequestBody Post newPost, OAuth2Authentication auth){
+    private void createPost(@RequestBody Post newPost, OAuth2Authentication auth){
         String email = auth.getName(); // yes, the email is found under "getName()"
         User user = userRepository.findByEmail(email); // use the email to get the user who made the request
         newPost.setAuthor(user); //set the user to the post

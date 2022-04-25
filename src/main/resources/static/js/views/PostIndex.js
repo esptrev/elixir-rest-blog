@@ -1,4 +1,5 @@
 import createView from "../createView.js";
+import {getHeaders} from "../auth.js";
 
 const BLOGS_URL = "http://localhost:8080/api/posts";
 
@@ -57,11 +58,9 @@ function submitNewPost() {
         }
         const OPTIONS = {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: getHeaders(),
             body: JSON.stringify(NEW_BLOG_INFO),
-        };
+        }
         fetch(BLOGS_URL, OPTIONS)
             .then(function (res) {
                 console.log(res);
@@ -69,7 +68,7 @@ function submitNewPost() {
             }).catch(function (reason) {
             console.log(reason);
             createView("/posts")
-        })
+        });
 
     })
 }///CLOSE OF SUBMITNEWPOST
@@ -110,11 +109,9 @@ function editCurrentPost() {
 
     const OPTIONS = {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: getHeaders(),
         body: JSON.stringify(BLOG_INFO_TO_EDIT),
-    };
+    }
 
     fetch(`${BLOGS_URL}/${BLOG_INFO_TO_EDIT.id}`, OPTIONS)
         .then(function (res) {
@@ -126,7 +123,7 @@ function editCurrentPost() {
     }).finally(() => {
         console.log("Edit blog button clicked");
         createView("/posts");
-    })
+    });
 
 }////END OF EDIT
 
@@ -136,6 +133,7 @@ function deleteCurrentPost() {
 
         const OPTIONS = {
             method: 'DELETE',
+            headers: getHeaders()
         }
         fetch(`${BLOGS_URL}/${id}`, OPTIONS)
             .then(function (res) {

@@ -42,7 +42,7 @@ export default function router(URI) {
         '/users': {
             returnView: Profile,
             state: {
-                users: "/api/users/"
+                users: "/api/users/2"
                 ///the one will have to change to a path parameter for hook up to database
             },
             uri: '/users',

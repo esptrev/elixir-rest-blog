@@ -1,4 +1,5 @@
 import CreateView from "../createView.js"
+import {getHeaders} from "../auth.js";
 
 const USER_URI = "http://localhost:8080/api/users"
 
@@ -6,15 +7,12 @@ const USER_URI = "http://localhost:8080/api/users"
 export default function Profile(props) {
     console.log(props);
     return `
-    <!DOCTYPE html>
-        <html lang="en">
-            <head>  
-                <meta charset="UTF-8"/>
+            <header>  
                 <title>Update Profile</title>
-            </head>
-            <body>
+            </header>
+            <main>
                 <h1>User Profile</h1>
-                <div id = "user-id-container">${props.users.id}</div>
+                <div id = "user-id-container">${props.users.id}
                     <form id="profile-info">
                         <label for="username">Username</label>
                         <input id="username" name="username" value= "${props.users.username}"><br>
@@ -30,26 +28,19 @@ export default function Profile(props) {
                         <button id="edit-profile-btn" type="button" class="btn-primary">Edit</button>
                     </form>               
                 </div>
-                 <div id = "blogPostDiv">
-                ${props.user.posts.map(post => {
-                    return `<h3>${post.title}</h3>`
-                }
-                ).join('')}
-    </div>
-    </body>
-    </html>
-    `
+                 <div id = "blogPostDiv"> ${props.user.posts.map(post => {return `<h3>${post.title}</h3>`}).join('')} </div>
+             </main> `;
 }
 
 export function ProfileEvent() {
     $("#update-profile-btn").click(function () {
-
         const id = 1;
         const newPassword = $("#confirm-password").val()
 
 ///makes post request
         let request = {
             method: "PUT",
+            headers: getHeaders()
         }
 ///sends to backend
         fetch(`${USER_URI}/${id}/updatePassword?newPassword=${newPassword}`, request)
@@ -58,6 +49,6 @@ export function ProfileEvent() {
                 CreateView("/api/users/{id}/updatePassword");
             })
 
-    })
+    });
 
 }
