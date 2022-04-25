@@ -1,6 +1,6 @@
 import CreateView from "../createView.js"
 
-const USER_URI = "http://localhost:8080/api/users"
+const USER_URI = "http://localhost:8080/api/user"
 
 export default function Register(props) {
     return `

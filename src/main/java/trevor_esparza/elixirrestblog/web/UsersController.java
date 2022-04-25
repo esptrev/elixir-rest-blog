@@ -2,6 +2,7 @@ package trevor_esparza.elixirrestblog.web;
 
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 import trevor_esparza.elixirrestblog.data.User;
 import trevor_esparza.elixirrestblog.data.UserRepository;
@@ -11,7 +12,7 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 @RestController
-@RequestMapping(value = "/api/users", headers = "Accept=application/json")
+@RequestMapping(value = "/api/user", headers = "Accept=application/json")
 public class UsersController {
     private final UserRepository userRepository;
     private final PasswordEncoder pwhashmaker;
@@ -29,6 +30,12 @@ public class UsersController {
     @GetMapping("{userId}")
     public Optional<User> getbyId(@PathVariable Long userId) {
         return userRepository.findById(userId);
+    }
+
+    @GetMapping("loggedUser")
+    public User getLoggedInUser(OAuth2Authentication auth){
+        String loggedInUser = auth.getName();
+        return userRepository.findByEmail(loggedInUser);
     }
 
 

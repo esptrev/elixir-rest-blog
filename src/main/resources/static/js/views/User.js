@@ -1,7 +1,7 @@
 import CreateView from "../createView.js"
 import {getHeaders} from "../auth.js";
 
-const USER_URI = "http://localhost:8080/api/users"
+const USER_URI = "http://localhost:8080/api/user"
 
 
 export default function Profile(props) {
@@ -28,7 +28,7 @@ export default function Profile(props) {
                         <button id="edit-profile-btn" type="button" class="btn-primary">Edit</button>
                     </form>               
                 </div>
-                 <div id = "blogPostDiv"> ${props.user.posts.map(post => {return `<h3>${post.title}</h3>`}).join('')} </div>
+                <div id = "blogPostDiv"> ${props.users.posts.map(post => {return `<h3>${post.title}</h3>`}).join('')} </div>
              </main> `;
 }
 
@@ -46,7 +46,7 @@ export function ProfileEvent() {
         fetch(`${USER_URI}/${id}/updatePassword?newPassword=${newPassword}`, request)
             .then(response => {
                 console.log(response.status);
-                CreateView("/api/users/{id}/updatePassword");
+                CreateView("/api/user/{id}/updatePassword");
             })
 
     });

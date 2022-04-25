@@ -39,13 +39,13 @@ export default function router(URI) {
             title: 'Register',
             viewEvent: RegisterEvent
         },
-        '/users': {
+        '/user': {
             returnView: Profile,
             state: {
-                users: "/api/users/2"
+                loggedinuser: "/api/user/loggedUser"
                 ///the one will have to change to a path parameter for hook up to database
             },
-            uri: '/users',
+            uri: '/user',
             title: 'Profile',
             viewEvent: ProfileEvent
         },
