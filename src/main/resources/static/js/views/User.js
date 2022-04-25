@@ -12,12 +12,12 @@ export default function Profile(props) {
             </header>
             <main>
                 <h1>User Profile</h1>
-                <div id = "user-id-container">${props.users.id}
+                <div id = "user-id-container">${props.loggedinuser}
                     <form id="profile-info">
                         <label for="username">Username</label>
-                        <input id="username" name="username" value= "${props.users.username}"><br>
+                        <input id="username" name="username" value= "${props.loggedinuser.username}"><br>
                         <label for="email" >Email</label>
-                        <input id="email" name="email" type="email" value = "${props.users.email}"><br>
+                        <input id="email" name="email" type="email" value = "${props.loggedinuser.email}"><br>
                         <label for="current password"> Current Password</label>
                         <input id="current password" name="current password" type="password"/><br>
                         <label for="new password">New Password</label>
@@ -28,7 +28,7 @@ export default function Profile(props) {
                         <button id="edit-profile-btn" type="button" class="btn-primary">Edit</button>
                     </form>               
                 </div>
-                <div id = "blogPostDiv"> ${props.users.posts.map(post => {return `<h3>${post.title}</h3>`}).join('')} </div>
+                <div id = "blogPostDiv"> ${props.loggedinuser.posts.map(post => {return `<h3>${post.title}</h3>`}).join('')} </div>
              </main> `;
 }
 

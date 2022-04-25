@@ -1,6 +1,7 @@
 import CreateView from "../createView.js"
+import {getHeaders} from "../auth.js";
 
-const USER_URI = "http://localhost:8080/api/user"
+const USER_URI = "http://localhost:8080/api/user/create"
 
 export default function Register(props) {
     return `
@@ -40,7 +41,7 @@ export function RegisterEvent() {
 ///makes post request
         let request = {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: getHeaders(),
             body: JSON.stringify(newUser)
         }
 ///sends to backend

@@ -10,7 +10,7 @@ import {RegisterEvent} from "./views/Register.js";
 import {PostsEvent} from "./views/PostIndex.js"
 import {ProfileEvent} from "./views/User.js";
 import Profile from "./views/User.js";
-
+import Logout, {LogoutEvents} from "./views/Logout.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -18,12 +18,20 @@ import Profile from "./views/User.js";
  * @returns {*}
  */
 export default function router(URI) {
+
     const routes = {
-        '/home': {
+        '/': {
             returnView: Home,
             state: {},
             uri: '/home',
             title: 'Home',
+        },
+        '/logout': {
+            returnView: Logout,
+            state: {},
+            uri: '/logout',
+            title: "Logout",
+            viewEvent: LogoutEvents
         },
         '/login': {
             returnView: Login,

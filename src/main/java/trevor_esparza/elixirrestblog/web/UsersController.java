@@ -39,7 +39,7 @@ public class UsersController {
     }
 
 
-    @PostMapping
+    @PostMapping("create")
     private void createUser(@RequestBody User newUser) {
         newUser.setRole(User.Role.USER);
         newUser.setPassword(newUser.getPassword());
