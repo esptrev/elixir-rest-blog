@@ -1,3 +1,5 @@
+import {showNotification} from "../messages.js";
+
 export default function Home(props) {
     console.log("The frontend did it. HER FAULT");
     return `
@@ -12,4 +14,8 @@ export default function Home(props) {
             </div>
         </main>
     `;
+}
+
+export function HomeEvents(){
+    showNotification("redirected to home after logout", "alert alert-primary");
 }

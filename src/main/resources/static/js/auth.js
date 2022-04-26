@@ -1,5 +1,6 @@
 import fetchData from "./fetchData.js";
 import createView from "./createView.js";
+import {showNotification} from "./messages.js";
 
 /**
  * Adds a login event to allow the user to initially obtain a new OAuth2.0 token
@@ -31,8 +32,14 @@ export default function addLoginEvent() {
                 route: `/oauth/token`
             },
             request).then((data) => {
+                if(data.route.error){
+                    showNotification("failed login attempt" + data.route.error, "warning");
+                    return;
+                }
             setTokens(data);
             createView("/");
+        }).catch(() => {
+
         });
     });
 }
