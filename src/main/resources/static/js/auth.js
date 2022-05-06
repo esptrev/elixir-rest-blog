@@ -32,17 +32,22 @@ export default function addLoginEvent() {
                 route: `/oauth/token`
             },
             request).then((data) => {
+                //If login fails, display message and stay on page
                 if(data.route.error){
-                    showNotification("failed login attempt" + data.route.error, "warning");
+                    showNotification("Failed login attempt" + data.route.error, "warning");
                     return;
                 }
             setTokens(data);
-            createView("/");
+            createView("/user");
         }).catch(() => {
 
         });
-    });
-}
+
+
+    });/// END OF EVENT LISTENER
+
+
+}///   END OF addLoginEvent
 
 /**
  * Gets the Authorization header needed for making requests to protected endpoints
@@ -76,4 +81,16 @@ function setTokens(responseData) {
 
 export function isLoggedIn() {
     return !!localStorage.getItem("access_token");
+}
+
+export function getUserRole() {
+    const accessToken = localStorage.getItem("access_token");
+    if(!accessToken) {
+        return false;
+    }
+    const parts = accessToken.split('.');
+    const payload = parts[1];
+    const decodedPayload = atob(payload);
+    const payloadObject = JSON.parse(decodedPayload);
+    return payloadObject.authorities[0];
 }

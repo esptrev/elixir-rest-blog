@@ -14,5 +14,5 @@ export default function About(props) {
 }
 
 export function AboutEvents(){
-    showNotification("Danger,Danger","alert alert-danger");
+    showNotification("Danger,Danger","danger");
 }

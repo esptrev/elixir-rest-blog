@@ -9,6 +9,7 @@ import {getNotificationElement} from "./messages.js";
 export default function render(props, route) {
     const app = document.querySelector('#app');
     const title = `REST Blog - ${route.title}`;
+    console.log(title);
     document.title = title;
     //language=html
     app.innerHTML = `${Navbar(null)}

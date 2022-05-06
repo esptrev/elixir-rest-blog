@@ -1,4 +1,5 @@
 import {showNotification} from "../messages.js";
+import {getUserRole} from "../auth.js";
 
 export default function Home(props) {
     console.log("The frontend did it. HER FAULT");
@@ -17,5 +18,6 @@ export default function Home(props) {
 }
 
 export function HomeEvents(){
-    showNotification("redirected to home after logout", "alert alert-primary");
+    const authority = getUserRole();
+    showNotification(authority, "info");
 }
