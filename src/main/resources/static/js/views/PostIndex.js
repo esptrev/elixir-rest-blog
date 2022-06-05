@@ -4,6 +4,7 @@ import {getHeaders} from "../auth.js";
 const BLOGS_URL = "http://localhost:8080/api/posts";
 
 export default function PostIndex(props) {
+    console.log(props)
     // HTML
     return `
         <header>
