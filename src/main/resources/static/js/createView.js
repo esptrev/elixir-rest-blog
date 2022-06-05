@@ -8,6 +8,10 @@ import {getHeaders} from "./auth.js";
  * @param URI
  */
 export default function createView(URI) {
+    //createView must wait for token removal
+    // await removeStaleTokens();
+
+
 
     let route = router(URI);
 
